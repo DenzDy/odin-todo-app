@@ -35,7 +35,7 @@ main{
 main > nav{
     border-radius: 1rem 0 0 1rem;
     background-color: var(--tertiary-white-color);
-    padding: 1.5rem 0 0 1.5rem;
+    padding: 1.5rem 0 0 1.75rem;
 }
 main > nav > ul > li{
     margin-bottom: 1rem;
