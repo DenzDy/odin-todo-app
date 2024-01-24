@@ -131,3 +131,50 @@ main > nav > ul > li{
 .task-done{
     opacity: 0.5;
 }
+#add-task-prompt{
+    min-width: 100%;
+    min-height: 100%;
+    position:absolute;
+    z-index: 5;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#prompt-card{
+    max-width: 20vw;
+    height: 20vw;
+    background-color: var(--secondary-white-color);
+    padding: 2rem;
+    box-sizing: border-box;
+}
+#prompt-card > form > input[type=text]{
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+#prompt-card > form > input[type=date]{
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+#prompt-card > form > input[type=submit]{
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: var(--primary-accent-color);
+    color: white;
+}
+
+label{
+    font-size: 1.25rem;
+    box-sizing: border-box;
+    font-weight: 500;
+}
