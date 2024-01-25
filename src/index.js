@@ -1,3 +1,2 @@
-import { loadHomepage } from './ui.js'
-
-loadHomepage();
+import UI from './ui.js'
+document.addEventListener('DOMContentLoaded', UI.loadHomepage());
