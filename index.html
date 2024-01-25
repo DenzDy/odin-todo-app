@@ -13,8 +13,21 @@
     <title>Document</title>
 </head>
 <body id="root">
-    
-    
+    <div id="add-task-prompt" class="inactive">
+        <div id="prompt-card">
+            <button id="prompt-close-button">X</button>
+            <form>
+                <label for="task_name">Task Name</label>
+                <input type="text" id="task_name" name="task_name" placeholder="Task Name...">
+                <label for="task_date">Task Due Date</label>
+                <input type="date" id="task_date" name="task_date">
+                <label for="task_details">Task Details</label>
+                <input type="text" id="task_details" name="task_details">
+                <input type="submit" value="Submit">
+                
+            </form>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>

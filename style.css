@@ -61,7 +61,7 @@ main > nav > ul > li{
     margin-bottom: 1rem;
     font-weight: 600;
 }
-.new-task-div{
+#new-task-div{
     padding: 1rem;
     color: white;
     background-color: var(--primary-accent-color);
@@ -137,7 +137,6 @@ main > nav > ul > li{
     position:absolute;
     z-index: 5;
     background-color: rgba(0,0,0,0.6);
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -147,6 +146,7 @@ main > nav > ul > li{
     background-color: var(--secondary-white-color);
     padding: 2rem;
     box-sizing: border-box;
+    position: relative;
 }
 #prompt-card > form > input[type=text]{
     width: 100%;
@@ -177,4 +177,17 @@ label{
     font-size: 1.25rem;
     box-sizing: border-box;
     font-weight: 500;
+}
+.active{
+    display: flex;
+}
+.inactive{
+    display: none;
+}
+#prompt-close-button{
+    position:absolute;
+    z-index: 5;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.25rem;
 }
