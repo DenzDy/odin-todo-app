@@ -13,9 +13,9 @@
     <title>Document</title>
 </head>
 <body id="root">
-    <div id="add-task-prompt" class="inactive">
-        <div id="prompt-card">
-            <button id="prompt-close-button">X</button>
+    <div id="add-task-prompt" class="add-prompt inactive">
+        <div class="prompt-card">
+            <button id="task-close" class="prompt-close-button">X</button>
             <form>
                 <label for="task_name">Task Name</label>
                 <input type="text" id="task_name" name="task_name" placeholder="Task Name...">
@@ -23,8 +23,17 @@
                 <input type="date" id="task_date" name="task_date">
                 <label for="task_details">Task Details</label>
                 <input type="text" id="task_details" name="task_details">
-                <input type="submit" value="Submit">
-                
+                <input type="button" id="task-submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <div id="add-project-prompt" class="add-prompt inactive">
+        <div class="prompt-card">
+            <button id="project-close"  class="prompt-close-button">X</button>
+            <form action="">
+                <label for="project_name">Project Name</label>
+                <input type="text" id="project_name" name="project_name" placeholder="Project Name...">
+                <input type="button" id="project-submit" value="Submit">
             </form>
         </div>
     </div>

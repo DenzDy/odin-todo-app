@@ -38,7 +38,7 @@ main{
 main > nav{
     border-radius: var(--border-radius) 0 0 var(--border-radius);
     background-color: var(--tertiary-white-color);
-    padding: 1.5rem 0 0 1.75rem;
+    padding: 1.5rem 1.5rem 0 1.75rem;
 }
 main > nav > ul > li{
     margin-bottom: 1rem;
@@ -61,7 +61,7 @@ main > nav > ul > li{
     margin-bottom: 1rem;
     font-weight: 600;
 }
-#new-task-div{
+.full-width-button{
     padding: 1rem;
     color: white;
     background-color: var(--primary-accent-color);
@@ -70,6 +70,8 @@ main > nav > ul > li{
     font-size: 1.3rem;
     box-sizing: border-box;
     display: flex;
+    border: none;
+    width: 100%;
     flex-direction: row;
     align-items: center;
 }
@@ -131,7 +133,7 @@ main > nav > ul > li{
 .task-done{
     opacity: 0.5;
 }
-#add-task-prompt{
+.add-prompt{
     min-width: 100%;
     min-height: 100%;
     position:absolute;
@@ -140,28 +142,28 @@ main > nav > ul > li{
     justify-content: center;
     align-items: center;
 }
-#prompt-card{
+.prompt-card{
     max-width: 20vw;
-    height: 20vw;
+    max-height: 20vw;
     background-color: var(--secondary-white-color);
     padding: 2rem;
     box-sizing: border-box;
     position: relative;
 }
-#prompt-card > form > input[type=text]{
+.prompt-card > form > input[type=text]{
     width: 100%;
     margin: 1rem 0 1rem 0;
     padding: 0.5rem;
     box-sizing: border-box;
 }
-#prompt-card > form > input[type=date]{
+.prompt-card > form > input[type=date]{
     width: 100%;
     margin: 1rem 0 1rem 0;
     padding: 0.5rem;
     box-sizing: border-box;
 }
 
-#prompt-card > form > input[type=submit]{
+.prompt-card > form > input[type=button]{
     width: 100%;
     margin: 1rem 0 1rem 0;
     padding: 0.5rem;
@@ -184,7 +186,7 @@ label{
 .inactive{
     display: none;
 }
-#prompt-close-button{
+.prompt-close-button{
     position:absolute;
     z-index: 5;
     right: 1rem;
