@@ -1,9 +1,9 @@
 import Project from './project.js'
 import Task from './task.js'
+import Storage from './storage.js';
 export default class UI{
     static add_task_to_ui(task_name, task_date, task_details){
         var task_list = document.getElementById("task-list");
-        var task = new Task(task_name, task_date, task_details);
         task_list.innerHTML += `
             <div class="task-div">
                 <div class="priority high"></div>
@@ -19,23 +19,33 @@ export default class UI{
                 </div>
             </div>
         `;
-        console.log("added");
     }
-    static submit_button_prompt_listener(entry_type){
-        var name = document.getElementById(`${entry_type}_name`).value;
-        var date = document.getElementById(`${entry_type}_date`).value;
-        UI.add_task_to_ui(name, date, "");
+    static load_all_tasks_from_storage(project_name){
+        var task_list = JSON.parse(localStorage.getItem(project_name));
+        for(let i = 0; i < task_list.length; i++){
+            UI.add_task_to_ui(task_list[i].name, task_list[i].date, task_list[i].details);
+        }
 
     }
-    static initiaiize_add_button(entry_type){
+    static submit_button_prompt_listener(entry_type, project_name){
+        var name = document.getElementById(`${entry_type}_name`).value;
+        var date = document.getElementById(`${entry_type}_date`).value;
+        var task = new Task(name, date, "");
+        project_name.append_to_task_list(task);
+        console.log(project_name.get_project_name());
+        console.log(project_name.get_task_list());
+        Storage.update_project_storage(project_name);
+        UI.add_task_to_ui(name, date, "");
+        UI.toggle_ui_prompt(entry_type);
+    }
+    static initiaiize_add_button(entry_type, project_name){
         var new_task_div = document.getElementById(`new-${entry_type}-button`);
         var close_prompt_button = document.getElementById(`${entry_type}-close`);
-        close_prompt_button.addEventListener("click", function(){UI.toggle_ui_prompt(entry_type)});
-        new_task_div.addEventListener("click", function(){UI.toggle_ui_prompt(entry_type)});
+        close_prompt_button.addEventListener("click", function(){UI.toggle_ui_prompt(entry_type, project_name)});
+        new_task_div.addEventListener("click", function(){UI.toggle_ui_prompt(entry_type, project_name)});
     }
-    static toggle_ui_prompt(entry_type){
+    static toggle_ui_prompt(entry_type, project_name){
         var prompt = document.getElementById(`add-${entry_type}-prompt`);
-        var submit_buttom = document.getElementById(`${entry_type}-submit`);
         if(prompt.classList.contains("active")){
             prompt.classList.remove("active");
             prompt.classList.add("inactive");
@@ -44,10 +54,14 @@ export default class UI{
             prompt.classList.remove("inactive");
             prompt.classList.add("active");
         }
-        submit_buttom.addEventListener("click", function(){UI.submit_button_prompt_listener(entry_type)});
     }
+    static initialize_submit_button(entry_type, project_name){
+        var submit_buttom = document.getElementById(`${entry_type}-submit`);
+        submit_buttom.addEventListener("click", function(){UI.submit_button_prompt_listener(entry_type, project_name)});
+    }    
     static loadHomepage(){
         var root = document.getElementById("root");
+        var all_task_data = new Project("All Tasks", []);
         root.innerHTML += `
         <div id="content-container">
             <header>
@@ -56,7 +70,7 @@ export default class UI{
             <main>
                 <nav>
                     <ul>
-                        <li class="nav-button">All Tasks</li>
+                        <li class="nav-button selected">All Tasks</li>
                         <li class="nav-button">Today</li>
                         <li class="nav-button">Week</li>
                         <li id="nav-divider">Projects</li>
@@ -87,7 +101,9 @@ export default class UI{
             </main>
         </div>
         `;
-        UI.initiaiize_add_button("task");
+        UI.initiaiize_add_button("task", all_task_data);
         UI.initiaiize_add_button("project");
+        UI.initialize_submit_button("task", all_task_data);
+        UI.load_all_tasks_from_storage("All Tasks");
     }
 }

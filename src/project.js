@@ -15,4 +15,7 @@ export default class Project{
     set_task_list(task_list){
         this.task_list = task_list
     }
+    append_to_task_list(task){
+        this.task_list.push(task);
+    }
 }
