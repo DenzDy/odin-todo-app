@@ -193,3 +193,7 @@ label{
     top: 1rem;
     font-size: 1.25rem;
 }
+.selected{
+    color: var(--primary-accent-color);
+    font-weight: 600;
+}
