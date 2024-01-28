@@ -43,6 +43,12 @@ main > nav{
 main > nav > ul > li{
     margin-bottom: 1rem;
 }
+#projects-nav{
+    margin-bottom: 1rem;
+}
+#projects-nav > li{
+    margin-bottom: 1rem;
+}
 #main-content-container{
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
     padding: 1.25rem;
@@ -115,10 +121,10 @@ main > nav > ul > li{
     height: 100%;
     border-radius: var(--border-radius) 0 0 var(--border-radius);
     margin-right: 1.35rem;
+    background-color: var(--primary-accent-color);
+
 }
-.high{
-    background-color: var(--red-accent-color);
-}
+
 .icon-size{
     width: 1.75rem;
     height: 1.75rem;

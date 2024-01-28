@@ -18,4 +18,8 @@ export default class Project{
     append_to_task_list(task){
         this.task_list.push(task);
     }
+    delete_from_task_list(task){
+        var index = this.task_list.indexOf(task);
+        this.task_list.splice(index, 1);
+    }
 }
