@@ -40,20 +40,46 @@ export default class UI{
             UI.add_task_to_ui(project,task);
         }
     }
+    static clear_task_list_ui(){
+        var task_list = document.getElementById("task-list");
+        task_list.innerHTML = "";
+    }
+    static project_nav_button_listener(project){
+        var selected = document.getElementsByClassName("selected");
+        var str = project.get_project_name();
+        var to_select = document.getElementById(str.replaceAll(' ', '-').toLowerCase());
+        console.log(to_select);
+        for(var i = 0; i < selected.length; i++){
+            selected[i].classList.remove("selected");
+        }
+        to_select.classList.add("selected");
+        UI.clear_task_list_ui();
+        UI.load_all_tasks_from_storage(project);
+        UI.initialize_submit_button("task", project);
+    }
     static add_project_to_nav(project){
         var project_nav = document.getElementById("projects-nav");
         project_nav.innerHTML += `
-            <li class="nav-button">${project.get_project_name()}</li>
+            <li class="nav-button" id="${project.get_project_name()}">${project.get_project_name()}</li>
         `;
+        var project_nav_button = document.getElementById(project.get_project_name());
+        project_nav_button.addEventListener("click", function(){UI.project_nav_button_listener(project)});
     }
     static load_project_nav_to_ui(){
         var project_list = Storage.get_projects_from_storage();
         var project_nav = document.getElementById("projects-nav");
         var html_stuff = ``;
         for (var i = 1; i < project_list.length; i++){
-            html_stuff += `<li class="nav-button">${project_list[i]}</li>`;
+            html_stuff += `<li class="nav-button" id="${project_list[i].replaceAll(' ', '-').toLowerCase()}">${project_list[i]}</li>`;
         }
         project_nav.innerHTML = html_stuff;
+        for (var i = 1; i < project_list.length; i++){
+            var x = document.getElementById(project_list[i]);
+            var proj = new Project(project_list[i], Storage.get_project_name_storage(project_list[i]));
+            console.log(proj);
+            x.addEventListener("click", function(){UI.project_nav_button_listener(proj)});
+        }
+
     }
     static submit_button_prompt_listener(entry_type, project_name){
         if(entry_type == "project"){
@@ -75,6 +101,10 @@ export default class UI{
     static initiaiize_add_button(entry_type, project_name){
         var new_task_div = document.getElementById(`new-${entry_type}-button`);
         var close_prompt_button = document.getElementById(`${entry_type}-close`);
+        close_prompt_button.replaceWith(close_prompt_button.cloneNode(true));
+        new_task_div.replaceWith(new_task_div.cloneNode(true));
+        var new_task_div = document.getElementById(`new-${entry_type}-button`);
+        var close_prompt_button = document.getElementById(`${entry_type}-close`);
         close_prompt_button.addEventListener("click", function(){UI.toggle_ui_prompt(entry_type, project_name)});
         new_task_div.addEventListener("click", function(){UI.toggle_ui_prompt(entry_type, project_name)});
     }
@@ -90,8 +120,14 @@ export default class UI{
         }
     }
     static initialize_submit_button(entry_type, project_name){
-        var submit_buttom = document.getElementById(`${entry_type}-submit`);
-        submit_buttom.addEventListener("click", function(){UI.submit_button_prompt_listener(entry_type, project_name)});
+        var submit_button = document.getElementById(`${entry_type}-submit`);
+        var listener = function(){
+            UI.submit_button_prompt_listener(entry_type, project_name);
+        }
+        submit_button.replaceWith(submit_button.cloneNode(true));
+        submit_button = document.getElementById(`${entry_type}-submit`);
+        submit_button.addEventListener("click", listener);
+        console.log(`event listener created for ${project_name.get_project_name()}`);
     }    
     static loadHomepage(){
         var root = document.getElementById("root");
@@ -104,7 +140,7 @@ export default class UI{
             <main>
                 <nav>
                     <ul>
-                        <li class="nav-button selected">All Tasks</li>
+                        <li class="nav-button selected" id="all-tasks">All Tasks</li>
                         <li class="nav-button">Today</li>
                         <li class="nav-button">Week</li>
                         <li id="nav-divider">Projects</li>
@@ -143,5 +179,7 @@ export default class UI{
         UI.initialize_submit_button("project", all_task_data);
         UI.load_project_nav_to_ui();
         UI.load_all_tasks_from_storage(all_task_data);
+        var all_task_nav = document.getElementById("all-tasks");
+        all_task_nav.addEventListener("click", function(){UI.project_nav_button_listener(all_task_data)});
     }
 }
